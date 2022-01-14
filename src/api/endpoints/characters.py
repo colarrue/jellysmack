@@ -17,7 +17,7 @@ def get_character(character_id, db: Session = Depends(src.api.session.get_db)):
 
 
 @router.get("", status_code=200, response_model=typing.List[src.schemas.characters.Character])
-def get_characters(offset=0, limit=10, status=None, gender=None, db: Session = Depends(src.api.session.get_db)):
+def get_characters(offset=0, limit=10, status=None, db: Session = Depends(src.api.session.get_db)):
     character_crud = src.crud.character.Character()
 
     if status is not None:
