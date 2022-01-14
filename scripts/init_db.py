@@ -130,19 +130,33 @@ def create_many_to_many_rel(db_session, association):
         db_session.commit()
 
 
-if __name__ == "__main__":
+def init_database(db_name, db_session, characters_input, episodes_input):
+    """
+    Create and intialize the database with proper data.
+
+    :param db_name: name of the database
+    :param db_session: database session
+    :param characters_input: json data of characters
+    :param episodes_input: json data of episodes
+    """
     # Initialize database with empty tables
-    db_name = "jellysmack.db"
     create_tables(db_name)
-    db_session = src.db.database.SessionLocal()
 
     # Load characters and get back association relationship
-    characters_input = "rick_morty-characters_v1.json"
     association = populate_character_table(db_session, characters_input)
 
     # Load episodes
-    episodes_input = "rick_morty-episodes_v1.json"
     populate_episode_table(db_session, episodes_input)
 
     # Create many-to-many relationship
     create_many_to_many_rel(db_session, association)
+
+
+if __name__ == "__main__":
+    # Set input data
+    db_name = "jellysmack.db"
+    characters_input = "rick_morty-characters_v1.json"
+    episodes_input = "rick_morty-episodes_v1.json"
+    # Intialize database
+    db_session = src.db.database.SessionLocal()
+    init_database(db_name, db_session, characters_input, episodes_input)
