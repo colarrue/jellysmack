@@ -9,6 +9,9 @@ class BaseCrud(abc.ABC):
     def get(self, db, id):
         return db.query(self.model).filter(self.model.id == id).first()
 
+    def get_multi(self, db, skip: int = 0, limit: int = 100):
+        return db.query(self.model).offset(skip).limit(limit).all()
+
     def create(self, db, obj_in):
         obj_in_data = jsonable_encoder(obj_in)
         db_obj = self.model(**obj_in_data)
