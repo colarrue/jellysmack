@@ -10,6 +10,7 @@ class Episode(BaseModel):
     episode: str
 
     characters: List
+    comments: List
 
     class Config:
         orm_mode = True
