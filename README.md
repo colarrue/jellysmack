@@ -22,6 +22,8 @@ Once your database is created, move it to the base path of the repository (/jell
 
 `uvicorn src.main:app`
 
+Follow the link http://127.0.0.1:8000 and use the swagger http://127.0.0.1:8000/docs.
+
 
 # Personal comments
 You will find for now the mandatory part of the project, meaning feature 1, 2 and 3.
