@@ -4,10 +4,12 @@ from sqlalchemy.types import DateTime
 
 from src.db.database import Base
 
-association_table = Table('association', Base.metadata,
-                          Column('character_id', ForeignKey('character.id'), primary_key=True),
-                          Column('episode_id', ForeignKey('episode.id'), primary_key=True)
-                          )
+association_table = Table(
+    "association",
+    Base.metadata,
+    Column("character_id", ForeignKey("character.id"), primary_key=True),
+    Column("episode_id", ForeignKey("episode.id"), primary_key=True),
+)
 
 
 class Character(Base):
