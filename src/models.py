@@ -2,18 +2,16 @@ from sqlalchemy import Column, Integer, String, Table, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.types import DateTime
 
-
 from src.db.database import Base
 
-
 association_table = Table('association', Base.metadata,
-    Column('characters_id', ForeignKey('characters.id'), primary_key=True),
-    Column('episodes_id', ForeignKey('episodes.id'), primary_key=True)
-)
+                          Column('character_id', ForeignKey('character.id'), primary_key=True),
+                          Column('episode_id', ForeignKey('episode.id'), primary_key=True)
+                          )
 
 
 class Character(Base):
-    __tablename__ = "characters"
+    __tablename__ = "character"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
@@ -26,7 +24,7 @@ class Character(Base):
 
 
 class Episode(Base):
-    __tablename__ = "episodes"
+    __tablename__ = "episode"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
