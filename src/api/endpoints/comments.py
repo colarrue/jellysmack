@@ -17,9 +17,9 @@ def get_comment(comment_id, db: Session = Depends(src.api.session.get_db)):
 
 
 @router.get("", status_code=200, response_model=typing.List[src.schemas.comments.Comment])
-def get_comments(max_results, db: Session = Depends(src.api.session.get_db)):
+def get_comments(offset, limit, db: Session = Depends(src.api.session.get_db)):
     comment_crud = src.crud.comment.Comment()
-    return comment_crud.get_multi(db=db, limit=max_results)
+    return comment_crud.get_multi(db=db, skip=offset, limit=limit)
 
 
 @router.post("", status_code=201, response_model=src.schemas.comments.Comment)
