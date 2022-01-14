@@ -1,7 +1,5 @@
-from typing import List, Optional
+from typing import Optional
 from pydantic import BaseModel
-
-import src.schemas.episodes
 
 
 class Character(BaseModel):
@@ -11,8 +9,6 @@ class Character(BaseModel):
     species: str
     type: Optional[str] = None
     gender: str
-
-    episodes = List[src.schemas.episodes.Episode]
 
     class Config:
         orm_mode = True

@@ -1,8 +1,6 @@
 import datetime
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel
-
-import src.schemas.characters
 
 
 class Episode(BaseModel):
@@ -11,7 +9,7 @@ class Episode(BaseModel):
     air_date: datetime.datetime
     episode: str
 
-    characters: List[src.schemas.characters.Character]
+    characters: List
 
     class Config:
         orm_mode = True
