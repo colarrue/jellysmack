@@ -1,8 +1,30 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+import typing
+
+import src.api.session
+import src.crud.character
+import src.models
+import src.schemas.characters
 
 router = APIRouter()
 
 
-@router.get("/{character_id}")
-def get_character(character_id):
-    return 12
+@router.get("/{character_id}", status_code=200, response_model=src.schemas.characters.Character)
+def get_character(character_id, db: Session = Depends(src.api.session.get_db)):
+    character_crud = src.crud.character.Character()
+    return character_crud.get(db, character_id)
+
+
+@router.get("", status_code=200, response_model=typing.List[src.schemas.characters.Character])
+def get_characters(max_results, db: Session = Depends(src.api.session.get_db)):
+    character_crud = src.crud.character.Character()
+    return character_crud.get_multi(db=db, limit=max_results)
+
+
+@router.post("", status_code=201, response_model=src.schemas.characters.Character)
+def create_character(
+    character: src.schemas.characters.Character, db: Session = Depends(src.api.session.get_db)
+):
+    character_crud = src.crud.character.Character()
+    return character_crud.create(db, character)
