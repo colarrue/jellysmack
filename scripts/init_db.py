@@ -20,7 +20,7 @@ def create_tables(db_name):
         os.remove(file_path)
 
     # Connect to sqlite database
-    connection = sqlite3.connect(db_name)
+    connection = sqlite3.connect(file_path)
 
     # Creating a cursor object to execute
     # SQL queries on a database table
@@ -53,10 +53,18 @@ def create_tables(db_name):
                             ON DELETE CASCADE);
                         """
 
+    create_table_comment = """CREATE TABLE comment(
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        content TEXT NOT NULL,
+                        episode_id int,
+                        character_id int);
+                        """
+
     # Creating the tables into our database
     cursor.execute(create_table_character)
     cursor.execute(create_table_episode)
     cursor.execute(create_table_junction)
+    cursor.execute(create_table_comment)
 
     connection.close()
 
@@ -132,7 +140,7 @@ def create_many_to_many_rel(db_session, association):
 
 def init_database(db_name, db_session, characters_input, episodes_input):
     """
-    Create and intialize the database with proper data.
+    Create and initialize the database with proper data.
 
     :param db_name: name of the database
     :param db_session: database session
