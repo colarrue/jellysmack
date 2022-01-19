@@ -42,5 +42,5 @@ class Comment(Base):
     __tablename__ = "comment"
     id = Column(Integer, primary_key=True, index=True)
     content = Column(String)
-    episode_id = Column(Integer, ForeignKey('episode.id'))
-    character_id = Column(Integer, ForeignKey('character.id'))
+    episode_id = Column(Integer, ForeignKey("episode.id"))
+    character_id = Column(Integer, ForeignKey("character.id"))
