@@ -1,5 +1,3 @@
-from fastapi.encoders import jsonable_encoder
-
 import src.crud.base
 import src.models
 

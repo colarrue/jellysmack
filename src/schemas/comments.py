@@ -1,11 +1,13 @@
+import typing
+
 from pydantic import BaseModel
 
 
 class Comment(BaseModel):
-    id: int = None
+    id: typing.Optional[int]
     content: str
-    episode_id: int = None
-    character_id: int = None
+    episode_id: typing.Optional[int]
+    character_id: typing.Optional[int]
 
     class Config:
         orm_mode = True
